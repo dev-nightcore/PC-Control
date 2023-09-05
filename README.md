@@ -1,6 +1,3 @@
-
-![Logo](https://github.com/EndFixed/PC-Control/blob/main/readme/logo.jpg)
-
 [![Stars](https://img.shields.io/github/stars/EndFixed/PC-Control.svg?style=flat-square&color=green)](https://github.com/EndFixed/PC-Control)
 [![Issues](https://img.shields.io/github/issues/EndFixed/PC-Control?style=flat-square&color=green)](https://github.com/EndFixed/PC-Control/issues)
 
