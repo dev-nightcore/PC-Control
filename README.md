@@ -1,4 +1,5 @@
-![Logo](https://imgur.com/a/skC2Z54)
+![Logo](https://github.com/EndFixed/PC-Control/blob/main/main-logo.png)
+
 [![Stars](https://img.shields.io/github/stars/EndFixed/PC-Control.svg?style=flat-square&color=green)](https://github.com/EndFixed/PC-Control)
 [![Issues](https://img.shields.io/github/issues/EndFixed/PC-Control?style=flat-square&color=green)](https://github.com/EndFixed/PC-Control/issues)
 
