@@ -25,5 +25,5 @@ python main.py
 
 
 ## License
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-red.svg?style=flat-square)](https://opensource.org/licenses/)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-red.svg?style=flat-square)](https://opensource.org/license/gpl-3-0/)
 
