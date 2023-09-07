@@ -1,3 +1,5 @@
+![Logo](https://github.com/EndFixed/PC-Control/blob/main/main-logo.png)
+
 [![Stars](https://img.shields.io/github/stars/EndFixed/PC-Control.svg?style=flat-square&color=green)](https://github.com/EndFixed/PC-Control)
 [![Issues](https://img.shields.io/github/issues/EndFixed/PC-Control?style=flat-square&color=green)](https://github.com/EndFixed/PC-Control/issues)
 
@@ -25,5 +27,5 @@ python main.py
 
 
 ## License
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-red.svg?style=flat-square)](https://opensource.org/licenses/)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-red.svg?style=flat-square)](https://opensource.org/license/gpl-3-0/)
 
