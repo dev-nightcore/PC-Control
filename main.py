@@ -1,27 +1,28 @@
 import logging
-import pyautogui as gui
 from aiogram import types, Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.utils import executor
 import os
-import ctypes
 import easygui
 
+import misc.screenshot as screenshot
+import misc.hotkeys as hotkeys
+import misc.volume as volume
+import misc.control as control
+
 bot = Bot("5560433951:AAHUIe0mtmmz6h4ntbZ-pvCAYIIXRFvoIHY")
+admin_id = ''
+
 dp = Dispatcher(bot, storage=MemoryStorage())
 logging.basicConfig(level=logging.INFO)
 
 
-@dp.message_handler(commands="start")
+@dp.on_startup()
 async def cmdStart(message: types.Message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    buttons = ["🔊", "🔇", "🔉",
-               "⏪", "⏯", "⏩",
-               "ALT+TAB", "WIN+L", "ALT+F4",
-               "Отменить таймер", "Перезагрузка", "Таймер на выключение",
-               "ScreenShot", "Сообщение на экран"]
+    buttons = ["Hotkeys","Media","Control"]
     keyboard.add(*buttons)
     await message.answer("PC Control >> Запущен", reply_markup=keyboard)
 
@@ -29,34 +30,33 @@ async def cmdStart(message: types.Message):
 
 
 @dp.message_handler(text_contains="ALT+TAB")
-async def altTab():
-    gui.hotkey("alt", "tab")
-
-
-@dp.message_handler(text_contains="WIN+L")
-async def winL():
-    ctypes.windll.user32.LockWorkStation()
-
-
-@dp.message_handler(text_contains="ScreenShot")
-async def screenShot(message: types.Message):
-    gui.screenshot('screenShot.png')
-    await message.answer_photo(open('screenShot.png', 'rb'))
+async def altTab(message: types.Message):
+    hotkeys.altTab()
 
 
 @dp.message_handler(text_contains="ALT+F4")
-async def altF4():
-    gui.hotkey("alt", "f4")
+async def altF4(message: types.Message):
+    hotkeys.altF4()
 
+@dp.message_handler(text_contains="ScreenShot")
+async def screenShot(message: types.Message):
+    if admin_id == message.chat.id:
+        screenshot.screenshot(message)
 
 @dp.message_handler(text_contains="Отменить таймер")
-async def taimerStop():
-    os.system('shutdown -a')
+async def taimerStop(message: types.Message):
+    if admin_id == message.chat.id:
+        control.shutdown()
+        await message.answer("✅")
 
+@dp.message_handler(text_contains="Log out from user")
+async def winL(message: types.Message):
+    hotkeys.winL()
 
-@dp.message_handler(text_contains="Перезагрузка")
-async def reboot():
-    os.system('shutdown -r')
+@dp.message_handler(text_contains="Reboot")
+async def reboot(message: types.Message):
+    if admin_id == message.chat.id:
+        control.reboot()
 
 
 class TimerW(StatesGroup):
@@ -94,3 +94,4 @@ async def msgBox(message: types.Message, state: FSMContext):
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
+    executor.on_startup()
