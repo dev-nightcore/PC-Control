@@ -1,97 +1,166 @@
-import logging
 from aiogram import types, Bot, Dispatcher
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.utils import executor
-import os
-import easygui
+import logging
 
 import misc.screenshot as screenshot
 import misc.hotkeys as hotkeys
 import misc.volume as volume
 import misc.control as control
-
-bot = Bot("5560433951:AAHUIe0mtmmz6h4ntbZ-pvCAYIIXRFvoIHY")
-admin_id = ''
-
-dp = Dispatcher(bot, storage=MemoryStorage())
-logging.basicConfig(level=logging.INFO)
+import misc.functions as functions
+import misc.keyboard as keyboard
+import misc.start_message as start_message
+import config as config
 
 
-@dp.on_startup()
+# -- Config
+bot = Bot(config.bot_token)
+admin_id = config.whitelisted_id
+
+# -- Bot init
+dp = Dispatcher(bot)
+logging.basicConfig(
+        format='| %(asctime)s | %(name)s | %(levelname)s |   %(message)s', datefmt='%m/%d/%Y %I:%M',
+        level=logging.INFO)
+
+start_message.sendMessage()
+
+# -- Keyboards handler
+@dp.message_handler(text_contains=['/start'])
 async def cmdStart(message: types.Message):
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    buttons = ["Hotkeys","Media","Control"]
-    keyboard.add(*buttons)
-    await message.answer("PC Control >> Запущен", reply_markup=keyboard)
+    if admin_id == message.chat.id:
+        await message.answer(text="Main menu", reply_markup=keyboard.main_keyboard)
+        await functions.deleteMessage(message)
+    else: await message.answer(text="You`re not whitelisted!")
+
+@dp.message_handler(text_contains=['Hotkeys'])
+async def cmdStart(message: types.Message):
+    await message.answer(text="Hotkeys menu", reply_markup=keyboard.hotkey_keyboard)
+    await functions.deleteMessage(message)
+
+@dp.message_handler(text_contains=['Controls'])
+async def cmdStart(message: types.Message):
+    await message.answer(text="Controls menu", reply_markup=keyboard.control_keyboard)
+    await functions.deleteMessage(message)
+
+@dp.message_handler(text_contains=['Media']) 
+async def cmdStart(message: types.Message):
+    await message.answer(text="Media control menu", reply_markup=keyboard.media_keyboard)
+    await functions.deleteMessage(message)
+
+@dp.message_handler(text_contains=['Screen']) 
+async def cmdStart(message: types.Message):
+    await message.answer(text="Screen menu", reply_markup=keyboard.screen_keyboard)
+    await functions.deleteMessage(message)
+
+@dp.message_handler(text_contains=['🔙 Back'])
+async def cmdStart(message: types.Message):
+    await message.answer(text="Main menu", reply_markup=keyboard.main_keyboard)
+    await functions.deleteMessage(message)
+    message.reply_markup
 
 
+# -- Media handlers, volume
+@dp.message_handler(text_contains="🔊")
+async def altF4(message: types.Message):
+    if admin_id == message.chat.id:
+        await volume.volUp()
+        await functions.deleteMessage(message)
+    else: await message.answer(text="You`re not whitelisted!")
+@dp.message_handler(text_contains="🔇")
+async def altF4(message: types.Message):
+    if admin_id == message.chat.id:
+        await volume.volOff()
+        await functions.deleteMessage(message)
+    else: await message.answer(text="You`re not whitelisted!")
+@dp.message_handler(text_contains="🔉")
+async def altF4(message: types.Message):
+    if admin_id == message.chat.id:
+        await volume.volDown()
+        await functions.deleteMessage(message)
+    else: await message.answer(text="You`re not whitelisted!")
 
+# -- Media handlers, tracks control
+@dp.message_handler(text_contains="⏪")
+async def altF4(message: types.Message):
+    if admin_id == message.chat.id:
+        await volume.trackPrev()
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
+@dp.message_handler(text_contains="⏯")
+async def altF4(message: types.Message):
+    if admin_id == message.chat.id:
+        await volume.playPause()
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
+@dp.message_handler(text_contains="⏩")
+async def altF4(message: types.Message):
+    if admin_id == message.chat.id:
+        await volume.trackNext()
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
 
+# -- Hotkeys handlers
 @dp.message_handler(text_contains="ALT+TAB")
 async def altTab(message: types.Message):
-    hotkeys.altTab()
-
+    if admin_id == message.chat.id:
+        await hotkeys.altTab()
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
 
 @dp.message_handler(text_contains="ALT+F4")
 async def altF4(message: types.Message):
-    hotkeys.altF4()
-
-@dp.message_handler(text_contains="ScreenShot")
-async def screenShot(message: types.Message):
     if admin_id == message.chat.id:
-        screenshot.screenshot(message)
+        await hotkeys.altF4()
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
 
-@dp.message_handler(text_contains="Отменить таймер")
+# -- Controls handlers
+@dp.message_handler(text_contains="Shutdown")
 async def taimerStop(message: types.Message):
     if admin_id == message.chat.id:
-        control.shutdown()
-        await message.answer("✅")
+        await control.shutdown()
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
 
 @dp.message_handler(text_contains="Log out from user")
 async def winL(message: types.Message):
-    hotkeys.winL()
+    if admin_id == message.chat.id:
+        await control.logOut()
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
 
 @dp.message_handler(text_contains="Reboot")
 async def reboot(message: types.Message):
     if admin_id == message.chat.id:
-        control.reboot()
+        await control.reboot()
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
 
+# -- Screen menu
+@dp.message_handler(text_contains="Screenshot")
+async def altTab(message: types.Message):
+    if admin_id == message.chat.id:
+        await screenshot.screenshot(message)
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
 
-class TimerW(StatesGroup):
-    writeTimer = State()
-    msgbox1 = State()
+@dp.message_handler(text_contains="Live Screenshot")
+async def altTab(message: types.Message):
+    if admin_id == message.chat.id:
+        await screenshot.live_screenshot(message)
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
 
-
-@dp.message_handler(text_contains="Таймер на выключение")
-async def taimerOff(message: types.Message):
-    await message.answer("Введите кол-во секунд по истечению которых пк выключится:")
-    await TimerW.writeTimer.set()
-
-
-@dp.message_handler(state=TimerW.writeTimer)
-async def taimer2Off(message: types.Message, state: FSMContext):
-    await state.update_data(wiritedTimer=message.text)
-    tmer = await state.get_data()
-    await state.finish()
-    os.system(f'shutdown /s /t {tmer["wiritedTimer"]}')
-
-
-@dp.message_handler(text_contains="Сообщение на экран")
-async def MsgBox(message: types.Message):
-    await message.answer("Введите текст:")
-    await TimerW.msgbox1.set()
-
-
-@dp.message_handler(state=TimerW.msgbox1)
-async def msgBox(message: types.Message, state: FSMContext):
-    await state.update_data(WritedText=message.text)
-    msg = await state.get_data()
-    await state.finish()
-    easygui.msgbox(f"{msg['WritedText']}", "PC_Control")
-
-
+# -- executor
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
-    executor.on_startup()

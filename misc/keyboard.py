@@ -2,9 +2,8 @@ from aiogram import types
 
 # -- Start menu
 main_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-buttons1 = ["Media control", "Hotkeys"
-           "Отменить таймер", "Перезагрузка", "Таймер на выключение",
-           "ScreenShot", "Сообщение на экран"]
+buttons1 = ["Media", "Hotkeys", "Controls",
+            "Screen"]
 main_keyboard.add(*buttons1)
 
 # -- Media menu
@@ -26,3 +25,12 @@ buttons4 = ["Reboot", "Shutdown",
             "Log out from user",
             "🔙 Back"]
 control_keyboard.add(*buttons4)
+
+# -- Screen menu
+screen_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+buttons5 = ["Screenshot", "Live Screenshot",
+            "🔙 Back"]
+screen_keyboard.add(*buttons5)
+
+cntlScreen_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+buttons6 = []
