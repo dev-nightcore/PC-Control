@@ -1,30 +1,14 @@
-![Logo](https://github.com/EndFixed/PC-Control/blob/main/main-logo.png)
-
-[![Stars](https://img.shields.io/github/stars/EndFixed/PC-Control.svg?style=flat-square&color=green)](https://github.com/EndFixed/PC-Control)
-[![Issues](https://img.shields.io/github/issues/EndFixed/PC-Control?style=flat-square&color=green)](https://github.com/EndFixed/PC-Control/issues)
-
-
-# PC - Control
 <h1 align="center">
-   PC Control
+    <img align="center" src="https://github.com/EndFixed/PC-Control/blob/main/main-logo.png">
 </h1>
+<h2 align="center">
+    A powerful tool to control your pc via telegram bot!
+</h2>
 <p align= "center">
    <kbd>
-   <img src="https://github.com/EndFixed/PC-Control/blob/main/main-logo.png">
-   </kbd><br><br>
-   <img src="https://img.shields.io/github/languages/top/EndFixed/PC-Control">
-   <img src="https://img.shields.io/github/stars/EndFixed/PC-Control">
-   <img src="https://img.shields.io/github/forks/EndFixed/PC-Control">
-   <br>
-   <img src="https://img.shields.io/github/last-commit/EndFixed/PC-Control">
-   <img src="https://img.shields.io/github/license/EndFixed/PC-Control">
-   <br>
-   <img src="https://img.shields.io/github/issues/EndFixed/PC-Control">
-   <img src="https://img.shields.io/github/issues-closed/EndFixed/PC-Control">
-   <br>
-   <br>
+   </kbd>
+        <img src="https://repobeats.axiom.co/api/embed/ce9d46594fffde4af578875f893a85244d0c2478.svg">
 </p>
-A powerful tool to control your pc via telegram bot!
 
 ## Usage/Examples
 1: Install requirements
@@ -38,12 +22,8 @@ pip install -r requiremqnts.txt
 python main.py
 ```
 
-
 ## Authors
-
 - [@EndFixed](https://www.github.com/EndFixed)
-
 
 ## License
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-red.svg?style=flat-square)](https://opensource.org/license/gpl-3-0/)
-
