@@ -5,7 +5,25 @@
 
 
 # PC - Control
-
+<h1 align="center">
+   PC Control
+</h1>
+<p align= "center">
+   <kbd>
+   <img src="https://github.com/EndFixed/PC-Control/blob/main/main-logo.png">
+   </kbd><br><br>
+   <img src="https://img.shields.io/github/languages/top/EndFixed/PC-Control">
+   <img src="https://img.shields.io/github/stars/EndFixed/PC-Control">
+   <img src="https://img.shields.io/github/forks/EndFixed/PC-Control">
+   <br>
+   <img src="https://img.shields.io/github/last-commit/EndFixed/PC-Control">
+   <img src="https://img.shields.io/github/license/EndFixed/PC-Control">
+   <br>
+   <img src="https://img.shields.io/github/issues/EndFixed/PC-Control">
+   <img src="https://img.shields.io/github/issues-closed/EndFixed/PC-Control">
+   <br>
+   <br>
+</p>
 A powerful tool to control your pc via telegram bot!
 
 ## Usage/Examples
