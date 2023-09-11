@@ -24,7 +24,7 @@ python main.py
 
 
 ## Authors
-- [@EndFixed](https://www.github.com/EndFixed)
+- [@ᴅᴇᴠ_ɴɪɢʜᴛᴄᴏʀᴇ](https://www.github.com/dev-nightcore)
 
 
 ## License
