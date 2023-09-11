@@ -5,9 +5,7 @@
     A powerful tool to control your pc via telegram bot!
 </h2>
 <p align= "center">
-   <kbd>
-   </kbd>
-        <img src="https://repobeats.axiom.co/api/embed/ce9d46594fffde4af578875f893a85244d0c2478.svg">
+        <img src="https://repobeats.axiom.co/api/embed/340a43f8fdc7a63d9cec10d1b717057def8b1732.svg">
 </p>
 
 ## Usage/Examples
