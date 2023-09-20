@@ -10,6 +10,8 @@ main_keyboard.add(*buttons1)
 media_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
 buttons2 = ["🔊", "🔇", "🔉",
            "⏪", "⏯", "⏩",
+           " ", "⬆️", " ",
+           "⬅️", "⬇️", "➡️",
            "🔙 Back"]
 media_keyboard.add(*buttons2)
 
@@ -28,7 +30,7 @@ control_keyboard.add(*buttons4)
 
 # -- Screen menu
 screen_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-buttons5 = ["Screenshot", "Live Screenshot",
+buttons5 = ["Screenshot",
             "🔙 Back"]
 screen_keyboard.add(*buttons5)
 
