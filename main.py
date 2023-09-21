@@ -1,6 +1,7 @@
 from aiogram import types, Bot, Dispatcher
 from aiogram.utils import executor
 import logging
+import asyncio
 
 import misc.screenshot as screenshot
 import misc.hotkeys as hotkeys
@@ -21,7 +22,6 @@ dp = Dispatcher(bot)
 logging.basicConfig(
         format='| %(asctime)s | %(name)s | %(levelname)s |   %(message)s', datefmt='%m/%d/%Y %I:%M',
         level=logging.INFO)
-start_message.sendmsg()
 
 # -- Keyboards handler
 @dp.message_handler(text=['/start'])
@@ -199,5 +199,10 @@ async def none(message: types.Message):
     await functions.deleteMessage(message)
 
 # -- executor
+async def onstart():
+    await start_message.send_message()
+
 if __name__ == '__main__':
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(onstart())
     executor.start_polling(dp, skip_updates=True)
