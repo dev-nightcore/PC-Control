@@ -1,5 +1,4 @@
 import pyautogui as gui
-import webbrowser
 
 async def volUp():
     gui.hotkey("volumeup")
@@ -23,6 +22,3 @@ async def arrowUp():
     gui.hotkey("up")
 async def arrowDown():
     gui.hotkey("down")
-
-async def play_youtube_video(youtube_url):
-    webbrowser.open(youtube_url)

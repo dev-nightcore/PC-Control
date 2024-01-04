@@ -1,8 +1,3 @@
-from aiogram import types, Bot, Dispatcher
-from aiogram.utils import executor
-import logging
-import asyncio
-
 import misc.screenshot as screenshot
 import misc.hotkeys as hotkeys
 import misc.media as media
@@ -10,11 +5,17 @@ import misc.control as control
 import misc.functions as functions
 import misc.keyboard as keyboard
 import misc.start_message as start_message
+import misc.game_controls as gamectrls
 import config as config
+
+from aiogram import types, Dispatcher
+from aiogram.utils import executor
+import logging
+import asyncio
 
 
 # -- Config
-bot = Bot(config.bot_token)
+bot = config.bot
 admin_id = config.whitelisted_id
 
 # -- Bot init
@@ -50,6 +51,12 @@ async def cmdStart(message: types.Message):
 async def cmdStart(message: types.Message):
     await message.answer(text="Screen menu", reply_markup=keyboard.screen_keyboard)
     await functions.deleteMessage(message)
+
+@dp.message_handler(text=['Game Controls']) 
+async def cmdStart(message: types.Message):
+    await message.answer(text="Game Contols menu", reply_markup=keyboard.game_ctrl_keyboard)
+    await functions.deleteMessage(message)
+
 
 @dp.message_handler(text=['🔙 Back'])
 async def cmdStart(message: types.Message):
@@ -132,15 +139,30 @@ async def arrowright(message: types.Message):
         await functions.answerSucsessAndDelete(message)
     else: await message.answer(text="You`re not whitelisted!")
 
-# -- Media open youtube
-@dp.message_handler(text="play_yt")
-async def play_yt(message: types.Message):
-    await functions.deleteMessage(message)
-    await media.play_youtube_video(message.get_args())
-    await message.answer(
-        f"<i>Video going to open.\nLink: <code>{message.get_args()}</code></i>",
-        parse_mode="html",
-    )
+# -- Game controls
+@dp.message_handler(text="Open Rust")
+async def openrust(message: types.Message):
+    if admin_id == message.chat.id:
+        await gamectrls.openRust()
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
+
+@dp.message_handler(text="Connect to server")
+async def openrust(message: types.Message):
+    if admin_id == message.chat.id:
+        await message.answer(text="Please write comand to connect to server!\nExample: /connect 11.11.111.11:11111")
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
+
+@dp.message_handler(text_contains="/connect")
+async def openrust(message: types.Message):
+    if admin_id == message.chat.id:
+        await gamectrls.connect_to_server(message=types.Message, args=message.get_args())
+        await functions.deleteMessage(message)
+        await functions.answerSucsessAndDelete(message)
+    else: await message.answer(text="You`re not whitelisted!")
 
 # -- Hotkeys handlers
 @dp.message_handler(text="ALT+TAB")

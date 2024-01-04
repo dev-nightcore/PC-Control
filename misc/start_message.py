@@ -1,5 +1,4 @@
-from config import whitelisted_id
-from main import bot
+from config import whitelisted_id, bot
 
 async def send_message():
     await bot.send_message(

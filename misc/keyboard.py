@@ -3,7 +3,7 @@ from aiogram import types
 # -- Start menu
 main_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
 buttons1 = ["Media", "Hotkeys", "Controls",
-            "Screen"]
+            "Screen", "Game Controls"]
 main_keyboard.add(*buttons1)
 
 # -- Media menu
@@ -33,6 +33,12 @@ screen_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
 buttons5 = ["Screenshot",
             "🔙 Back"]
 screen_keyboard.add(*buttons5)
+
+# -- Game Controls menu
+game_ctrl_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+buttons7 = ["Open Rust", "Connect to server",
+            "🔙 Back"]
+game_ctrl_keyboard.add(*buttons7)
 
 cntlScreen_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
 buttons6 = []

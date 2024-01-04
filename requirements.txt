@@ -2,3 +2,4 @@ aiogram==2.14.3
 pyautogui
 requests
 asyncio
+keyboard

@@ -1,2 +1,5 @@
-bot_token = "6247679440:AAEEdDjSPmLckLo7HXwx7vv0O_guE6kDDB0"
+import aiogram
+
+bot_token = "6833260259:AAEX94z2XllmOmugNePoloezav78uEMPtZc"
+bot = aiogram.Bot(bot_token)
 whitelisted_id = 5771068385
